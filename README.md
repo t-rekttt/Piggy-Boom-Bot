@@ -1,6 +1,10 @@
 # Piggy-Boom-Bot
 A bot for Piggy Boom game at https://apps.facebook.com/cos_th_pig/
 
+# Requirements
+- Python 2.7.x
+- Python requests (Install it by running "pip install requests"
+
 # How to use?
 1. Clone this repo
 2. Go to https://developers.facebook.com/tools/debug/accesstoken/?app_id=1707883516108963
