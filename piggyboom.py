@@ -1,4 +1,14 @@
 import requests, json, time
+banner = '''=======================================
+*       _ ___ _______         __  __  *
+*      | |__ \__   __|       |  \/  | *
+*      | |  ) | | | ___  __ _| \  / | *
+*  _   | | / /  | |/ _ \/ _` | |\/| | *
+* | |__| |/ /_  | |  __/ (_| | |  | | *
+*  \____/|____| |_|\___|\__,_|_|  |_| *
+*                                     *
+=======================================
+'''
 url = 'http://d2fd20abim5npz.cloudfront.net/planetpigth/m/'
 login_url = url+'gameNew/login/'
 play_url = url+'zhuanpan/play/'
@@ -77,7 +87,7 @@ def s(data):
 def start(access_token):
     login = l(access_token)
     if login[0]:
-        print "Logged in as "+login[2]
+        print "Logged in"
         while (1>0):           
             login = l(access_token)
             l_data = login[0]
@@ -97,19 +107,17 @@ def start(access_token):
             'time':time.time(),
             }
             
-            if status == '':
+            if status != 'steal':
                 time.sleep(2)
                 spin = s(data)
                 if spin[0]:
                     print('Reward: '+spin[1]+'. Spin left: '+spin[2])
+                    if spin[1]=='fire':
+                        print('Waiting for you to fire')
+                        time.sleep(30)
                 else:
                     print('Out of spin, sleeping '+str(count_down))
-                    time.sleep(count_down)
-                    
-            elif status == 'fire':
-                print('Got '+status+', sleeping 10s')
-                time.sleep(10)
-            
+                    time.sleep(count_down)            
             elif status == 'steal':
                 fbpic = l_data['zhuanpan']['stealTarget']['fbpic']
                 if fbpic != '':
@@ -142,6 +150,7 @@ def start(access_token):
         print('Login error')
 
 if __name__ == '__main__':
+    print(banner)
     f = open('token.txt')
     #token = raw_input('Token: ')
     token = f.read().strip('\n')
