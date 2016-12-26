@@ -36,7 +36,7 @@ def get_info(puid,data):
         data['puid'] = puid
         info = requests.post(url+'userplanet/get/',data=data).json()
         if check(info):
-            return info
+            return info['_d']
         else:
             return False
     except Exception as e:
